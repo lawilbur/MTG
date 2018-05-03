@@ -1,0 +1,26 @@
+{
+  "name": "mtg",
+  "version": "1.0.0",
+  "description": "",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/lawilbur/MTG.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/lawilbur/MTG/issues"
+  },
+  "homepage": "https://github.com/lawilbur/MTG#readme",
+  "dependencies": {
+    "bcrypt": "^2.0.1",
+    "express": "^4.16.3",
+    "mongoose": "^5.0.17",
+    "pg": "^7.4.1"
+  }
+}
