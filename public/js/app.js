@@ -17,6 +17,27 @@ class Navbar extends React.Component {
 		)
 	}
 }
+class SearchResults extends React.Component {
+	constructor (props) {
+		
+	}
+	getPlayers () {
+	fetch('https://api.magicthegathering.io/v1/cards')
+	.then(response => response.json())
+	.then(data => {
+		console.log(data.cards[0]);
+	})
+	.catch(error => console.log(error));
+	}
+
+	render() {
+		return (
+			<button onClick={()=> this.getPlayers()}>Search</button>
+		)
+	}
+
+
+}
 
 class App extends React.Component {
 	render () {
@@ -24,6 +45,7 @@ class App extends React.Component {
 			<div>
 				<Navbar/>
 				<h1>MTG Search Tool</h1>
+				<SearchResults />
 
 			</div>
 		);
