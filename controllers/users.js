@@ -1,31 +1,35 @@
 const express = require('express');
 const user = express.Router();
-const { Client } = require('pg');
-const client = new Client({
-  user: 'lawilbur',
-  host: 'localhost',
-  database: 'mtg',
-  port: 5432,
-})
+const db = require('./db.js');
+db.connect();
 
-user.get('/' , (req , res)=>{
-    const response = []
-    client.connect()
-    client.query('Select * From users;', (err, query)=>{
-        response = query.rows;
-        console.log(query.rows)
-        client.end()
-    })
-    res.json(query)
-
+user.get('/' , (req , res, next)=> {
+    db.getUsers((err, usersresult)=> {
+        if(err){
+            return next(err);
+        }
+        res.send(usersresult);
+    });
 });
 
 user.post('/' , (req , res)=>{
-    res.send('post')
+    // console.log(req.body);
+    db.createUser(req.body, (err, createdUser)=>{
+        if (err){
+            res.send(err);
+        }
+        res.send(req.body)
+    })
+
 });
 
 user.delete('/:id' , (req , res)=>{
-    res.send('delete')
+    db.deleteUser(req.params.id, (err, deletedUser)=>{
+        if (err){
+            res.send(err);
+        }
+        res.send(req.params.id)
+    })
 });
 
 user.put('/:id' , (req , res)=>{
