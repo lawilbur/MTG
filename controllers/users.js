@@ -9,13 +9,15 @@ const client = new Client({
 })
 
 user.get('/' , (req , res)=>{
+    const response = []
     client.connect()
-
-    client.query('Select * From users;', (err, res)=>{
-        console.log(err, res)
+    client.query('Select * From users;', (err, query)=>{
+        response = query.rows;
+        console.log(query.rows)
         client.end()
     })
-    res.send('index')
+    res.json(query)
+
 });
 
 user.post('/' , (req , res)=>{
