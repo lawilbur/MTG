@@ -1,7 +1,11 @@
-/* *{
+*{
     border: 1px solid green;
     margin: 2px;
-} */
+}
 body{
     background-color:lightgrey;
+}
+
+.title{
+    text-align: center;
 }
