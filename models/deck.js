@@ -49,7 +49,7 @@ const createDeck = (body, cd) =>{
 
 const updateDeck = (body, id, cd) =>{
     // console.log(id);
-    client.query("Update users Set username=$1, password=$2 Where id=$3 Returning id, username, password;",[body.username, body.password, id], (err , res)=> {
+    client.query("Update decks2 Set name=$1, user_id=$2, cards=$3 Where id=$4 Returning id, name, user_id, cards;",[body.name, body.user_id, body.cards, id], (err , res)=> {
         if(err){
             return cd(err);
         }
@@ -61,7 +61,7 @@ const updateDeck = (body, id, cd) =>{
 
 const deleteDeck = (id, cd) =>{
     // console.log(id);
-    client.query("Delete From users Where id = $1;",[id], (err , res)=> {
+    client.query("Delete From decks2 Where id = $1;",[id], (err , res)=> {
         if(err){
             return cd(err);
         }else {

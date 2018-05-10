@@ -24,16 +24,16 @@ deck.post('/' , (req , res)=>{
 });
 
 deck.delete('/:id' , (req , res)=>{
-    db.deleteUser(req.params.id, (err, deletedUser)=>{
+    db.deleteDeck(req.params.id, (err, deletedDeck)=>{
         if (err){
             res.send(err);
         }
-        res.send(deletedUser)
+        res.send(deletedDeck)
     })
 });
 
 deck.put('/:id' , (req , res)=>{
-    db.updateUser(req.body, req.params.id, (err, updatedUser)=>{
+    db.updateDeck(req.body, req.params.id, (err, updatedUser)=>{
         if (err){
             res.send(err);
         }

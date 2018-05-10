@@ -16,6 +16,13 @@
 
             <div ng-include="'partials/nav.html'"></div>
 
+            <div ng-include="ctrl.includePath"></div>
+            
+            <div class="cardContainer">
+                <div class='oneCard' ng-repeat="card in ctrl.returnedCards">
+                    <img ng-src="{{card.imageUrl}}" title="{{card.name}}"/>
+                </div>
+            </div>
 
     	</div>
   </body>
