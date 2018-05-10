@@ -9,13 +9,13 @@ const client = new Client({
 
 const connect = () =>{
     client.connect((err)=> {
-        if(!err){
+        if(!err){ //this should be removed
             client.query('Select * From users;', (err , res)=>{
                 if(err){
                     console.log(err);
                 }
                 else {
-                    console.log(res.rows);
+                    // console.log(res.rows);
                 }
 
             })
@@ -26,7 +26,7 @@ const connect = () =>{
 }
 
 const getUsers = (cd) =>{
-    client.query('Select * From users;', (err , res)=> {
+    client.query('Select id, username From users;', (err , res)=> {
         if(err){
             return cd(err);
         }else {
@@ -37,7 +37,19 @@ const getUsers = (cd) =>{
 
 const createUser = (body, cd) =>{
     // console.log(body.username);
-    client.query("Insert Into users (username, password) Values ($1, $2);",[body.username, body.password], (err , res)=> {
+    client.query("Insert Into users (username, password) Values ($1, $2) Returning id, username, password;",[body.username, body.password], (err , res)=> {
+        if(err){
+            return cd(err);
+        }
+        // console.log(res);
+        cd(null, res.rows)
+
+    });
+}
+
+const updateUser = (body, id, cd) =>{
+    // console.log(id);
+    client.query("Update users Set username=$1, password=$2 Where id=$3 Returning id, username, password;",[body.username, body.password, id], (err , res)=> {
         if(err){
             return cd(err);
         }
@@ -48,15 +60,15 @@ const createUser = (body, cd) =>{
 }
 
 const deleteUser = (id, cd) =>{
-    console.log(id);
+    // console.log(id);
     client.query("Delete From users Where id = $1;",[id], (err , res)=> {
         if(err){
             return cd(err);
         }else {
             // console.log(res.rows);
-            cd(null, res.rows)
+            cd(null, {deleted: true})
         }
     });
 }
 
-module.exports = {connect, getUsers, createUser, deleteUser};
+module.exports = {connect, getUsers, createUser, deleteUser, updateUser};

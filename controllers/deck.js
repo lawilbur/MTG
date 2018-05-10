@@ -1,29 +1,29 @@
 const express = require('express');
-const user = express.Router();
-const db = require('../models/users.js');
+const deck = express.Router();
+const db = require('../models/deck.js');
 db.connect();
 
-user.get('/' , (req , res, next)=> {
-    db.getUsers((err, usersresult)=> {
+deck.get('/' , (req , res, next)=> {
+    db.getDeck((err, deckresult)=> {
         if(err){
             return next(err);
         }
-        res.send(usersresult);
+        res.send(deckresult);
     });
 });
 
-user.post('/' , (req , res)=>{
+deck.post('/' , (req , res)=>{
     // console.log(req.body);
-    db.createUser(req.body, (err, createdUser)=>{
+    db.createDeck(req.body, (err, createdDeck)=>{
         if (err){
             res.send(err);
         }
-        res.send(createdUser)
+        res.send(createdDeck)
     })
 
 });
 
-user.delete('/:id' , (req , res)=>{
+deck.delete('/:id' , (req , res)=>{
     db.deleteUser(req.params.id, (err, deletedUser)=>{
         if (err){
             res.send(err);
@@ -32,7 +32,7 @@ user.delete('/:id' , (req , res)=>{
     })
 });
 
-user.put('/:id' , (req , res)=>{
+deck.put('/:id' , (req , res)=>{
     db.updateUser(req.body, req.params.id, (err, updatedUser)=>{
         if (err){
             res.send(err);
@@ -41,4 +41,4 @@ user.put('/:id' , (req , res)=>{
     })
 });
 
-module.exports = user;
+module.exports = deck;

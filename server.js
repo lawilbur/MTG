@@ -9,6 +9,9 @@ app.use(express.urlencoded({extended:false}))
 const userController = require('./controllers/users.js');
 app.use('/user' , userController);
 
+const deckController = require('./controllers/deck.js');
+app.use('/deck' , deckController);
+
 
 
 

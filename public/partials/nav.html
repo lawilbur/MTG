@@ -1,13 +1,21 @@
-<nav className="navbar navbar-dark bg-dark">
-    <div className="navbar-nav">
-    <a className="nav-item nav-link" href="#">Signup</a>
+<div class=container>
+<nav class="navbar navbar-dark bg-dark">
+    <div class="navbar-nav">
+        <a class="nav-item nav-link" href="#">Signup</a>
     </div>
-    <form onSubmit={this.handleSubmit} class="form-inline">
-        <input class="form-control mr-sm-1" type="search" placeholder="Search" aria-label="Search"></input>
+    <form ng-submit='ctrl.searchCards()' class="form-inline">
+        <input class="form-control mr-sm-1" type="search" placeholder="Search" aria-label="Search" ng-model='ctrl.cardTitle'></input>
         <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
     </form>
-    <div className="navbar-nav">
-    <a className="nav-item nav-link" href="#">Login</a>
+    <div class="navbar-nav">
+        <a class="nav-item nav-link" href="#">Login</a>
     </div>
 
 </nav>
+</div>
+<div class="cardContainer">
+    <div class='oneCard' ng-repeat="card in ctrl.returnedCards">
+        <img ng-src="{{card.imageUrl}}" title="{{card.name}}"/>
+    </div>
+
+</div>
