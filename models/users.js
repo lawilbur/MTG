@@ -33,7 +33,7 @@ const getUser = (body, cd) =>{
         } else if (res.rowCount === 0){
             cd(null, null)
         }else {
-            console.log(res);
+            // console.log(res);
             cd(null, res.rows)
         }
     });

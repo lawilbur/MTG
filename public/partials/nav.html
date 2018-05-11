@@ -5,8 +5,8 @@
             <a class="nav-item nav-link dropdown-toggle" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" href="#">Account</a>
             <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
                 <a ng-if="ctrl.loggedOut" class="nav-item nav-link dropdown-item" ng-click="ctrl.changeInclude('signup')" href="#">Sign Up</a>
-                <a ng-if="ctrl.loggedIn" class="nav-item nav-link dropdown-item" ng-click="ctrl.changeInclude('home')" href="#">Delete Account</a>
-                <a ng-if="ctrl.loggedIn" class="nav-item nav-link dropdown-item" ng-click="ctrl.changeInclude('editAccount')" href="#">Edit Account</a>
+                <a ng-if="ctrl.loggedIn" class="nav-item nav-link dropdown-item" ng-click="ctrl.deleteAccount()" href="#">Delete Account</a>
+                <a ng-if="ctrl.loggedIn" class="nav-item nav-link dropdown-item" ng-click="ctrl.changeInclude('updateAccount')" href="#">Edit Account</a>
             </div>
         </div>
     <!-- </div> -->

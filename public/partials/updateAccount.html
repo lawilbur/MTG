@@ -1,0 +1,15 @@
+<div class="loginBox bg-dark">
+    <h1>Edit Account</h1>
+    <h6 ng-if="ctrl.loginError">{{ctrl.loginErrorMessage}}</h6>
+    <form ng-submit="ctrl.updateAccount()">
+        <div class="form-group form-row col-md-10">
+            <label for="username">New Username:</label>
+            <input class="form-control" ng-model="ctrl.editData.username" type="text" id="username" placeholder="username"/>
+        </div>
+        <div class="form-group form-row col-md-10">
+            <label for="password">New Password:</label>
+            <input class="form-control" ng-model="ctrl.editData.password" type="text" id="password" placeholder="password"/>
+        </div>
+        <button class="btn btn-outline-success logButton" type="submit">Submit</button>
+    </form>
+</div>

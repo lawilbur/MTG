@@ -7,6 +7,7 @@ app.controller("MainController", ["$http", function($http){
 	this.deckArray = [];
 	this.loginData = {};
 	this.signUpData = {};
+	this.editData = {};
 	this.currentUser = "";
 	this.currentUserId = 0;
 	this.loggedIn = false;
@@ -16,6 +17,39 @@ app.controller("MainController", ["$http", function($http){
 	this.changeInclude = (path) => {
 		this.includePath = 'partials/' + path + '.html';
 	};
+
+	this.deleteAccount = () =>{
+		console.log(this.currentUserId);
+		$http({
+			method: "DELETE",
+			url:"/user/"+ this.currentUserId,
+		}).then((response) =>{
+			alert("Account Deleted")
+		}, (error) => {
+			console.log(error);
+		}).catch((err) => console.log('Catch: ', err));
+		this.includePath = 'partials/home.html';
+		this.loggedInChange();
+		this.currentUser = "";
+		this.currentUserId = 0;
+
+	}
+
+	this.updateAccount = () =>{
+		console.log(this.currentUserId);
+		$http({
+			method: "PUT",
+			url:"/user/"+ this.currentUserId,
+			data: this.editData,
+		}).then((response) =>{
+			this.editData = {};
+			this.currentUser = response.data[0].username
+		}, (error) => {
+			console.log(error);
+		}).catch((err) => console.log('Catch: ', err));
+		this.includePath = 'partials/profile.html';
+
+	}
 
 	this.loggedInChange = () =>{
 		this.loggedIn = !this.loggedIn;

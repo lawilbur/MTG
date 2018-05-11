@@ -41,6 +41,7 @@ user.post('/login' , (req , res)=>{
 });
 
 user.delete('/:id' , (req , res)=>{
+    console.log("got to delete");
     db.deleteUser(req.params.id, (err, deletedUser)=>{
         if (err){
             res.send(err);
