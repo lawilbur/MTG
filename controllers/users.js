@@ -12,13 +12,30 @@ user.get('/' , (req , res, next)=> {
     });
 });
 
-user.post('/' , (req , res)=>{
+user.post('/signup' , (req , res)=>{
     // console.log(req.body);
     db.createUser(req.body, (err, createdUser)=>{
         if (err){
             res.send(err);
         }
         res.send(createdUser)
+    })
+
+});
+
+user.post('/login' , (req , res)=>{
+    db.getUser(req.body, (err, gottenUser)=>{
+        if (err){
+            res.send(err);
+        } else if(gottenUser === null){
+            res.status(404).json({
+                    status: 404,
+                    message: "Username not on record."
+            })
+        }else {
+            res.send(gottenUser)
+        }
+
     })
 
 });

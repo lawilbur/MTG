@@ -25,11 +25,15 @@ const connect = () =>{
     })
 }
 
-const getUsers = (cd) =>{
-    client.query('Select id, username From users;', (err , res)=> {
+const getUser = (body, cd) =>{
+    // console.log(body);
+    client.query('Select * From users Where username = $1;',[body.username], (err , res)=> {
         if(err){
             return cd(err);
+        } else if (res.rowCount === 0){
+            cd(null, null)
         }else {
+            console.log(res);
             cd(null, res.rows)
         }
     });
@@ -71,4 +75,4 @@ const deleteUser = (id, cd) =>{
     });
 }
 
-module.exports = {connect, getUsers, createUser, deleteUser, updateUser};
+module.exports = {connect, getUser, createUser, deleteUser, updateUser};

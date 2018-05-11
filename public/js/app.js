@@ -7,12 +7,20 @@ app.controller("MainController", ["$http", function($http){
 	this.deckArray = [];
 	this.loginData = {};
 	this.signUpData = {};
-
+	this.currentUser = "";
+	this.currentUserId = 0;
+	this.loggedIn = false;
+	this.loggedOut = true;
 
 	this.includePath = 'partials/home.html';
 	this.changeInclude = (path) => {
 		this.includePath = 'partials/' + path + '.html';
 	};
+
+	this.loggedInChange = () =>{
+		this.loggedIn = !this.loggedIn;
+		this.loggedOut = !this.loggedOut;
+	}
 
 	this.searchCards = () =>{
 		$http({
@@ -38,13 +46,39 @@ app.controller("MainController", ["$http", function($http){
 
 	}
 
-	this.signUp = (item) => {
-		console.log(this.signUpData);
+	this.loginError = false;
+	this.loginErrorMessage = "";
+
+	this.login = () => {
+		// console.log(this.signUpData);
 		$http({
 			method: "POST",
-			url: "/user",
+			url: "/user/login",
+			data: this.loginData
+		}).then((response) => {
+				console.log(response);
+				this.currentUser = response.data[0].username;
+				this.currentUserId = response.data[0].id;
+				this.loginData={};
+				this.changeInclude('profile');
+				this.loginError = false;
+				this.loginErrorMessage = "";
+				this.loggedInChange();
+		}, (err) =>{
+			console.log(err.data.message);
+			this.loginError = true;
+			this.loginErrorMessage = err.data.message;
+		}).catch((err) => console.log(err));
+	}
+
+	this.signUp = () => {
+		// console.log(this.signUpData);
+		$http({
+			method: "POST",
+			url: "/user/signup",
 			data: this.signUpData
 		}).then((response) => {
+			console.log(response);
 			this.signUpData={};
 			this.changeInclude('login');
 		}, (err) =>{

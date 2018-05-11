@@ -1,13 +1,14 @@
 <div class="loginBox bg-dark">
     <h1>Login</h1>
+    <h6 ng-if="ctrl.loginError">{{ctrl.loginErrorMessage}}</h6>
     <form ng-submit="ctrl.login()">
         <div class="form-group form-row col-md-10">
             <label for="username">Username:</label>
-            <input class="form-control" ng-model="ctrl.username" type="text" id="username" placeholder="username"/>
+            <input class="form-control" ng-model="ctrl.loginData.username" type="text" id="username" placeholder="username"/>
         </div>
         <div class="form-group form-row col-md-10">
             <label for="password">Password:</label>
-            <input class="form-control" ng-model="ctrl.password" type="text" id="password" placeholder="password"/>
+            <input class="form-control" ng-model="ctrl.loginData.password" type="text" id="password" placeholder="password"/>
         </div>
         <button class="btn btn-outline-success logButton" type="submit">Login</button>
     </form>

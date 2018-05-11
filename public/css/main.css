@@ -29,7 +29,7 @@ img{
 
 .navbar{
     border-radius: 100px;
-    align-items: baseline;
+    /* align-items: baseline; */
 }
 .container{
     max-width: 90%;
@@ -59,4 +59,8 @@ img{
 }
 .logButton{
     margin: 10px;
+}
+#dropdownMenuLink{
+    color: rgba(255,255,255,.5);
+    padding-left: 0;
 }
