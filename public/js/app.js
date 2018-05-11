@@ -18,39 +18,6 @@ app.controller("MainController", ["$http", function($http){
 		this.includePath = 'partials/' + path + '.html';
 	};
 
-	this.deleteAccount = () =>{
-		console.log(this.currentUserId);
-		$http({
-			method: "DELETE",
-			url:"/user/"+ this.currentUserId,
-		}).then((response) =>{
-			alert("Account Deleted")
-		}, (error) => {
-			console.log(error);
-		}).catch((err) => console.log('Catch: ', err));
-		this.includePath = 'partials/home.html';
-		this.loggedInChange();
-		this.currentUser = "";
-		this.currentUserId = 0;
-
-	}
-
-	this.updateAccount = () =>{
-		console.log(this.currentUserId);
-		$http({
-			method: "PUT",
-			url:"/user/"+ this.currentUserId,
-			data: this.editData,
-		}).then((response) =>{
-			this.editData = {};
-			this.currentUser = response.data[0].username
-		}, (error) => {
-			console.log(error);
-		}).catch((err) => console.log('Catch: ', err));
-		this.includePath = 'partials/profile.html';
-
-	}
-
 	this.loggedInChange = () =>{
 		this.loggedIn = !this.loggedIn;
 		this.loggedOut = !this.loggedOut;
@@ -78,6 +45,20 @@ app.controller("MainController", ["$http", function($http){
 
 	this.getDecks = () =>{
 
+	}
+
+	this.clearAll = () =>{
+		this.cardTitle='';
+		this.returnedCards=[];
+		this.deckArray = [];
+		this.loginData = {};
+		this.signUpData = {};
+		this.editData = {};
+		this.currentUser = "";
+		this.currentUserId = 0;
+		this.loggedIn = false;
+		this.loggedOut = true;
+		this.changeInclude('home');
 	}
 
 	this.loginError = false;
@@ -120,5 +101,37 @@ app.controller("MainController", ["$http", function($http){
 		}).catch((err) => console.log(err));
 	}
 
+	this.deleteAccount = () =>{
+		console.log(this.currentUserId);
+		$http({
+			method: "DELETE",
+			url:"/user/"+ this.currentUserId,
+		}).then((response) =>{
+			alert("Account Deleted")
+		}, (error) => {
+			console.log(error);
+		}).catch((err) => console.log('Catch: ', err));
+		this.includePath = 'partials/home.html';
+		this.loggedInChange();
+		this.currentUser = "";
+		this.currentUserId = 0;
+
+	}
+
+	this.updateAccount = () =>{
+		console.log(this.currentUserId);
+		$http({
+			method: "PUT",
+			url:"/user/"+ this.currentUserId,
+			data: this.editData,
+		}).then((response) =>{
+			this.editData = {};
+			this.currentUser = response.data[0].username
+		}, (error) => {
+			console.log(error);
+		}).catch((err) => console.log('Catch: ', err));
+		this.includePath = 'partials/profile.html';
+
+	}
 	// this.searchCards();
 }]);

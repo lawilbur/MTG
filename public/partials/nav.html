@@ -16,7 +16,7 @@
     </form>
     <div class="navbar-nav">
         <a ng-if="ctrl.loggedOut" ng-click="ctrl.changeInclude('login')" class="nav-item nav-link" href="#">Login</a>
-        <a ng-if="ctrl.loggedIn" ng-click="ctrl.changeInclude('home')" class="nav-item nav-link" href="#">Logout</a>
+        <a ng-if="ctrl.loggedIn" ng-click="ctrl.clearAll()" class="nav-item nav-link" href="#">Logout</a>
     </div>
 
 </nav>
