@@ -5,7 +5,7 @@ const client = new Client(process.env.DATABASE_URL || 'postgresql://localhost:54
 const connect = () =>{
     client.connect((err)=> {
         if(!err){ //this should be removed
-            client.query('Select * From decks;', (err , res)=>{
+            client.query('Select * From decks2;', (err , res)=>{
                 if(err){
                     console.log(err);
                 }
