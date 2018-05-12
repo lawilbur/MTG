@@ -4,6 +4,7 @@ const db = require('../models/deck.js');
 db.connect();
 
 deck.get('/' , (req , res, next)=> {
+    console.log("inside get route");
     db.getDeck((err, deckresult)=> {
         if(err){
             return next(err);

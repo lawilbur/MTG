@@ -25,6 +25,7 @@ const getDeck = (cd) =>{
         if(err){
             return cd(err);
         }else {
+            console.log("selected from decks"+ res.row);
             cd(null, res.rows)
         }
     });

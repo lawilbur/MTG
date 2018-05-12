@@ -1,5 +1,19 @@
 <div>
-    <h6>Welcome, {{ctrl.currentUser}}</h6>
-    <div>
+    <div class="sideBar">
+        <div>
+            <button class="btn btn-outline-success" type="submit" ng-click="ctrl.getDecks()">Decks</button>
+        </div>
+        <h6>Welcome, {{ctrl.currentUser}}</h6>
 
-</div>
+        <div ng-repeat="deck in ctrl.gottenDecks">
+            <h1>Deck: {{deck.name}}</h1>
+
+        </div>
+
+
+    </div>
+    <div class="cardContainer">
+        <div class='oneCard' ng-repeat="item in ctrl.cardsToBeAdded">
+            <img ng-src="{{item.imageUrl}}" title="{{item.name}}"/>
+        </div>
+    </div>

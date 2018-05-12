@@ -8,12 +8,12 @@ app.controller("MainController", ["$http", function($http){
 	this.loginData = {};
 	this.signUpData = {};
 	this.editData = {};
-	this.currentUser = "";
-	this.currentUserId = 0;
-	this.loggedIn = false;
-	this.loggedOut = true;
+	this.currentUser = "Test1";
+	this.currentUserId = 1;
+	this.loggedIn = true;
+	this.loggedOut = false;
 
-	this.includePath = 'partials/home.html';
+	this.includePath = 'partials/profile.html';
 	this.changeInclude = (path) => {
 		this.includePath = 'partials/' + path + '.html';
 	};
@@ -38,13 +38,36 @@ app.controller("MainController", ["$http", function($http){
 		}).catch((err) => console.log('Catch: ', err));
 	}
 
+	this.cardsToBeAdded = [];
 
+	this.addToProfile = (id) =>{
+		console.log(id);
+		if(this.currentUserId === 0) {
+			alert("You must be logged in to add a card")
+		} else {
+			this.cardsToBeAdded.push(this.returnedCards[id])
+		 	this.returnedCards.splice(id, 1);
+
+
+		}
+	}
+	this.addADeck = () =>{
+
+	}
 	this.addToDeck = (id) => {
 
 	}
 
 	this.getDecks = () =>{
-
+		$http({
+			method: "GET",
+			url: "/deck",
+			data: this.currentUserId
+		}).then((response) => {
+			console.log(response.data);
+		}, (err) =>{
+			console.log(err);
+		}).catch((err) => console.log(err));
 	}
 
 	this.clearAll = () =>{

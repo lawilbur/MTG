@@ -20,7 +20,7 @@
 
             <div class="cardContainer">
                 <div class='oneCard' ng-repeat="card in ctrl.returnedCards">
-                    <img ng-src="{{card.imageUrl}}" title="{{card.name}}"/>
+                    <img ng-click="ctrl.addToProfile($index)" ng-src="{{card.imageUrl}}" title="{{card.name}}"/>
                 </div>
             </div>
 
