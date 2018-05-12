@@ -1,19 +1,34 @@
-<div>
-    <div class="sideBar">
+<div class="profile">
+
+        <div class="sideBar col-2">
+            <h6>Welcome, {{ctrl.currentUser}}</h6>
+            <div>
+                <button class="btn btn-outline-success" type="submit" ng-click="ctrl.getDecks()">Decks</button>
+                <a ng-click="ctrl.switchDeckAddedView()" href="#">unsaved cards</a>
+            </div>
+
+
+            <div ng-repeat="deck in ctrl.fetchedDeckArray">
+                <h6 ng-click="ctrl.showDeck($index)">Deck: {{deck.name}}</h6>
+            </div>
+
+
+        </div>
+        <div ng-show="ctrl.viewingAdded" class="cardContainerProfile col-10">
+            <div class='oneCard' ng-repeat="card in ctrl.cardsToBeAdded">
+                <img ng-src="{{card.imageUrl}}" title="{{card.name}}"/>
+            </div>
+        </div>
+
+        <div ng-show="ctrl.viewingDeck" class="cardContainerProfile col-10">
+            <div class='oneCard' ng-repeat="item in ctrl.showDeckCards">
+                <!-- <img ng-src="{{item.imageUrl}}" title="{{item.name}}"/> -->
+                <h1>{{item.name}}</h1>
+                <h1>{{item.type}}</h1>
+            </div>
+        </div>
+
         <div>
-            <button class="btn btn-outline-success" type="submit" ng-click="ctrl.getDecks()">Decks</button>
-        </div>
-        <h6>Welcome, {{ctrl.currentUser}}</h6>
-
-        <div ng-repeat="deck in ctrl.gottenDecks">
-            <h1>Deck: {{deck.name}}</h1>
-
-        </div>
 
 
-    </div>
-    <div class="cardContainer">
-        <div class='oneCard' ng-repeat="item in ctrl.cardsToBeAdded">
-            <img ng-src="{{item.imageUrl}}" title="{{item.name}}"/>
-        </div>
-    </div>
+</div>

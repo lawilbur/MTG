@@ -4,7 +4,7 @@ app.controller("MainController", ["$http", function($http){
 
 	this.cardTitle='';
 	this.returnedCards=[];
-	this.deckArray = [];
+	this.fetchedDeckArray = [];
 	this.loginData = {};
 	this.signUpData = {};
 	this.editData = {};
@@ -39,7 +39,13 @@ app.controller("MainController", ["$http", function($http){
 	}
 
 	this.cardsToBeAdded = [];
-
+	this.viewingAdded = true;
+	this.viewingDeck = false;
+	this.showDeckCards =[];
+	this.switchDeckAddedView = () =>{
+		this.viewingDeck = !this.viewingDeck;
+		this.viewingAdded = !this.viewingAdded;
+	}
 	this.addToProfile = (id) =>{
 		console.log(id);
 		if(this.currentUserId === 0) {
@@ -47,8 +53,6 @@ app.controller("MainController", ["$http", function($http){
 		} else {
 			this.cardsToBeAdded.push(this.returnedCards[id])
 		 	this.returnedCards.splice(id, 1);
-
-
 		}
 	}
 	this.addADeck = () =>{
@@ -58,13 +62,28 @@ app.controller("MainController", ["$http", function($http){
 
 	}
 
+	this.showDeck = (id) =>{
+		this.showDeckCards = [];
+		// console.log(this.fetchedDeckArray[id]);
+		for(let i=0; i<this.fetchedDeckArray[id].cards.length; i++){
+			console.log(this.fetchedDeckArray[id].cards[i]);
+			this.showDeckCards.push(this.fetchedDeckArray[id].cards[i])
+		}
+		if(this.viewingDeck !== true){
+			this.viewingDeck = !this.viewingDeck;
+			this.viewingAdded = !this.viewingAdded;
+		}
+	}
+
 	this.getDecks = () =>{
 		$http({
 			method: "GET",
 			url: "/deck",
 			data: this.currentUserId
 		}).then((response) => {
-			console.log(response.data);
+			for(let i=0; i<response.data.length; i++){
+				this.fetchedDeckArray.push(response.data[i]);
+			}
 		}, (err) =>{
 			console.log(err);
 		}).catch((err) => console.log(err));
