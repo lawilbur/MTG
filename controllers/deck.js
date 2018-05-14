@@ -3,9 +3,9 @@ const deck = express.Router();
 const db = require('../models/deck.js');
 db.connect();
 
-deck.get('/' , (req , res, next)=> {
-    console.log("inside get route");
-    db.getDeck((err, deckresult)=> {
+deck.get('/:id' , (req , res)=> {
+    console.log(req.params.id);
+    db.getDeck(req.params.id, (err, deckresult)=> {
         if(err){
             return next(err);
         }
@@ -14,7 +14,7 @@ deck.get('/' , (req , res, next)=> {
 });
 
 deck.post('/' , (req , res)=>{
-    console.log(req.body);
+    // console.log(req.body);
     db.createDeck(req.body, (err, createdDeck)=>{
         if (err){
             res.send(err);

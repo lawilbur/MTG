@@ -13,7 +13,7 @@ app.controller("MainController", ["$http", function($http){
 	this.loggedIn = false;
 	this.loggedOut = true;
 	this.createDeck = true;
-	this.deckCreateData = {}
+	this.deckCreateData = {};
 
 	this.includePath = 'partials/home.html';
 	this.changeInclude = (path) => {
@@ -94,11 +94,11 @@ app.controller("MainController", ["$http", function($http){
 	}
 
 	this.getDecks = () =>{
+		console.log(this.currentUserId);
 		this.fetchedDeckArray = [];
 		$http({
 			method: "GET",
-			url: "/deck",
-			data: this.currentUserId
+			url: "/deck/" + this.currentUserId,
 		}).then((response) => {
 			for(let i=0; i<response.data.length; i++){
 				this.fetchedDeckArray.push(response.data[i]);
@@ -111,7 +111,7 @@ app.controller("MainController", ["$http", function($http){
 	this.clearAll = () =>{
 		this.cardTitle='';
 		this.returnedCards=[];
-		this.deckArray = [];
+		this.fetchedDeckArray = [];
 		this.loginData = {};
 		this.signUpData = {};
 		this.editData = {};
@@ -120,6 +120,10 @@ app.controller("MainController", ["$http", function($http){
 		this.loggedIn = false;
 		this.loggedOut = true;
 		this.changeInclude('home');
+		this.cardsToBeAdded = [];
+		this.viewingAdded = true;
+		this.viewingDeck = false;
+		this.showDeckCards =[];
 	}
 
 	this.loginError = false;

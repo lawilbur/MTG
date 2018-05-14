@@ -20,8 +20,9 @@ const connect = () =>{
     })
 }
 
-const getDeck = (cd) =>{
-    client.query('Select * From decks2;', (err , res)=> {
+const getDeck = (id, cd) =>{
+    // console.log(body);
+    client.query('Select * From decks2 Where user_id=$1;',[id], (err , res)=> {
         if(err){
             return cd(err);
         }else {
