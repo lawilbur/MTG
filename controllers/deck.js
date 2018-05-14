@@ -14,7 +14,7 @@ deck.get('/' , (req , res, next)=> {
 });
 
 deck.post('/' , (req , res)=>{
-    // console.log(req.body);
+    console.log(req.body);
     db.createDeck(req.body, (err, createdDeck)=>{
         if (err){
             res.send(err);

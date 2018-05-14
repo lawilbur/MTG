@@ -61,9 +61,23 @@ app.controller("MainController", ["$http", function($http){
 	this.addADeck = () =>{
 
 	}
-	this.addToDeck = (id) => {
-
+	this.addToDeck = () => {
+		console.log("add to Deck function");
+		$http({
+			method: "POST",
+			url: "/deck",
+			data: {
+				name: this.deckCreateData.name,
+				user_id: this.currentUserId,
+				cards: this.cardsToBeAdded
+			}
+		}).then((response) => {
+			this.getDecks();
+		}, (err) =>{
+			console.log(err);
+		}).catch((err) => console.log(err));
 	}
+
 
 	this.showDeck = (id) =>{
 		this.showDeckCards = [];
