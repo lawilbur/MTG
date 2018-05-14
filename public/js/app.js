@@ -72,6 +72,7 @@ app.controller("MainController", ["$http", function($http){
 				cards: this.cardsToBeAdded
 			}
 		}).then((response) => {
+			this.cardsToBeAdded = [];
 			this.getDecks();
 		}, (err) =>{
 			console.log(err);
