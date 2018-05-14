@@ -4,7 +4,8 @@
             <h6>Welcome, {{ctrl.currentUser}}</h6>
             <div>
                 <button class="btn btn-outline-success" type="submit" ng-click="ctrl.getDecks()">Decks</button>
-                <a ng-click="ctrl.switchDeckAddedView()" href="#">unsaved cards</a>
+                <button class="btn btn-outline-success" ng-click="ctrl.switchDeckAddedView()">unsaved cards</button>
+                <!-- <button class="btn btn-outline-success" ng-click="ctrl.switchDeckAddedView()">unsaved cards</button> -->
             </div>
 
 
@@ -14,21 +15,31 @@
 
 
         </div>
-        <div ng-show="ctrl.viewingAdded" class="cardContainerProfile col-10">
+        <div ng-if="ctrl.viewingAdded" class="cardContainerProfile col-10">
             <div class='oneCard' ng-repeat="card in ctrl.cardsToBeAdded">
                 <img ng-src="{{card.imageUrl}}" title="{{card.name}}"/>
             </div>
+            <div class="container col-md-12">
+            <form class="col-md-3">
+                <div >
+                    <label for="name">Deck Name:</label>
+                    <input class="form-control " ng-model="ctrl.deckCreateData.name" type="text" id="username" name="username" placeholder="username"/>
+                </div>
+                <div class="form-check col">
+                    <input type="checkbox" class="form-check-input" id="addUnsavedCards">
+                    <label class="form-check-label" for="exampleCheck1">Add unsaved Cards</label>
+                </div>
+                <button class="btn btn-outline-success logButton" type="submit">Create Deck</button>
+            </form>
+            </div>
         </div>
 
-        <div ng-show="ctrl.viewingDeck" class="cardContainerProfile col-10">
+        <div ng-if="ctrl.viewingDeck" class="cardContainerProfile col-10">
             <div class='oneCard' ng-repeat="item in ctrl.showDeckCards">
                 <!-- <img ng-src="{{item.imageUrl}}" title="{{item.name}}"/> -->
                 <h1>{{item.name}}</h1>
                 <h1>{{item.type}}</h1>
             </div>
         </div>
-
-        <div>
-
 
 </div>

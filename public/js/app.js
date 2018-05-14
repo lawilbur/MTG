@@ -8,12 +8,14 @@ app.controller("MainController", ["$http", function($http){
 	this.loginData = {};
 	this.signUpData = {};
 	this.editData = {};
-	this.currentUser = "Test1";
-	this.currentUserId = 1;
-	this.loggedIn = true;
-	this.loggedOut = false;
+	this.currentUser = "";
+	this.currentUserId = 0;
+	this.loggedIn = false;
+	this.loggedOut = true;
+	this.createDeck = true;
+	this.deckCreateData = {}
 
-	this.includePath = 'partials/profile.html';
+	this.includePath = 'partials/home.html';
 	this.changeInclude = (path) => {
 		this.includePath = 'partials/' + path + '.html';
 	};
@@ -42,6 +44,7 @@ app.controller("MainController", ["$http", function($http){
 	this.viewingAdded = true;
 	this.viewingDeck = false;
 	this.showDeckCards =[];
+
 	this.switchDeckAddedView = () =>{
 		this.viewingDeck = !this.viewingDeck;
 		this.viewingAdded = !this.viewingAdded;
@@ -76,6 +79,7 @@ app.controller("MainController", ["$http", function($http){
 	}
 
 	this.getDecks = () =>{
+		this.fetchedDeckArray = [];
 		$http({
 			method: "GET",
 			url: "/deck",

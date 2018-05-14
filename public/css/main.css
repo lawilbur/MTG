@@ -85,3 +85,8 @@ img{
     display: flex;
     margin: 10px;
 }
+
+.createDeck {
+    display: flex;
+
+}
